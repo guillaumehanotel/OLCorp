@@ -1,17 +1,18 @@
 
-public class User {
+public class User extends ADEntity {
 
-	private String name;
+	private static int nbUser = 1;
+	
 	private String firstname;
 	private String lastname;
 	private String mail;
 	private String telephone;
 
-	
-	
 
 	public User(String name, String firstname, String lastname, String mail, String telephone) {
-		this.name = name;
+		super(nbUser, name);		
+		nbUser++;
+
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.mail = mail;
@@ -19,19 +20,16 @@ public class User {
 	}
 	
 	public User(String name) {
-		this.name = name;
+		super(nbUser, name);
+		nbUser++;
 	}
 
-	public User() {}
-
-
-
-	public String getName() {
-		return name;
+	public User() {
+		super(nbUser);
+		nbUser++;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -59,8 +57,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", firstname=" + firstname + ", lastname=" + lastname + ", mail=" + mail
-				+ ", telephone=" + telephone + "]";
+		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", lastname=" + lastname + ", mail=" + mail
+				+ ", telephone=" + telephone + ", DN=" + distinguishedName + "]";
 	}
 	
 	
