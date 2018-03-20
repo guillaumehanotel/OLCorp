@@ -7,10 +7,10 @@
 
 Le projet sera divisé en quatre phases :
 
-  Phase 1 - Déploiement de l'architecture système
-  Phase 2 - Développement d'un service Web pour procéder à l'administration basique Active Directory
-  Phase 3 - Développement d'une application mobile pour procéder à l'administration basique Active Directory
-  Phase 4 - Mettre en place une interaction avec un module IOT
+ - Phase 1 - Déploiement de l'architecture système
+ - Phase 2 - Développement d'un service Web pour procéder à l'administration basique Active Directory
+ - Phase 3 - Développement d'une application mobile pour procéder à l'administration basique Active Directory
+ - Phase 4 - Mettre en place une interaction avec un module IOT
 
 
 ## Phase 1 : livraison de l’infrastructure
