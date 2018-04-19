@@ -4,33 +4,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.guillaumehanotel.olcorp.api.OrganizationUnitService;
-import com.guillaumehanotel.olcorp.api.UserService;
 import com.guillaumehanotel.olcorp.beans.OrganizationUnit;
-import com.guillaumehanotel.olcorp.beans.User;
 import com.guillaumehanotel.olcorp.com.guillaumehanotel.olcorp.utils.HttpUtils;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             tvIsConnected.setBackgroundColor(0xFF00CC00);
             tvIsConnected.setText("You are connected");
         } else {
-            tvIsConnected.setText("You are NOT connected");
+            tvIsConnected.setText("You are NOT connected : Check ip addr");
         }
 
         organization_unit_add_btn.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +80,9 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
 
             String ou_name = extras.getString("ou_name");
-            organizationUnits.add(new OrganizationUnit(ou_name));
+            String ou_dn = extras.getString("ou_dn");
+            organizationUnits.add(new OrganizationUnit(ou_name, ou_dn));
             organizationUnitAdapter.notifyDataSetChanged();
-
-            //TODO :  REQUETE POST API
 
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT);
@@ -111,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 OrganizationUnit ou = organizationUnits.get(position);
-
+                Log.d("ou", ou.toString());
 
             }
         });
@@ -123,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         HttpUtils httpUtils = HttpUtils.getInstance();
 
-        OrganizationUnitService organizationUnitService = httpUtils.retrofit.create(OrganizationUnitService.class);
+        OrganizationUnitService organizationUnitService = httpUtils.organizationUnitService;
 
         Call<List<OrganizationUnit>> getAllOrganizationUnitsCall = organizationUnitService.getAllOrganizationUnits();
 

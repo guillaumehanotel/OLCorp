@@ -3,6 +3,8 @@ package com.guillaumehanotel.olcorp.com.guillaumehanotel.olcorp.utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.guillaumehanotel.olcorp.api.OrganizationUnitService;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,17 +25,31 @@ public class HttpUtils {
 
 
     private static HttpUtils instance;
-    public Retrofit retrofit;
+    private Retrofit retrofit;
+
+    public OrganizationUnitService organizationUnitService;
 
     private HttpUtils(){
         String HOME_IP = "192.168.1.29";
         String YNOV_IP = "10.33.3.20";
 
+        // Debug Request
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://" + YNOV_IP + ":8080")
+
+
+        this.retrofit = new Retrofit.Builder()
+                .baseUrl("http://" + HOME_IP + ":8080")
                 .addConverterFactory(GsonConverterFactory.create())
+                //.client(httpClient.build())
                 .build();
+
+
+
+        organizationUnitService = retrofit.create(OrganizationUnitService.class);
 
     }
 

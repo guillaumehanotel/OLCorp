@@ -3,10 +3,19 @@ package com.guillaumehanotel.olcorp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.guillaumehanotel.olcorp.api.OrganizationUnitService;
+import com.guillaumehanotel.olcorp.beans.OrganizationUnit;
+import com.guillaumehanotel.olcorp.com.guillaumehanotel.olcorp.utils.HttpUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateOrganizationUnitActivity extends AppCompatActivity {
 
@@ -34,14 +43,11 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
                 } else {
 
 
-                    Intent intent = new Intent();
-                    Bundle extras = new Bundle();
+                    OrganizationUnit ou = new OrganizationUnit();
+                    ou.setName(ou_name);
+                    ou.setDistinguishedName("OU=" + ou_name + ",DC=DOMAIN,DC=LOCAL");
 
-                    extras.putString("ou_name", ou_name);
-                    intent.putExtras(extras);
-
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    createOrganizationUnit(ou);
 
                 }
 
@@ -50,4 +56,54 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    private void createOrganizationUnit(final OrganizationUnit organizationUnit){
+
+        HttpUtils httpUtils = HttpUtils.getInstance();
+
+        OrganizationUnitService organizationUnitService = httpUtils.organizationUnitService;
+
+        Call<OrganizationUnit> call = organizationUnitService.createOrganizationUnit(organizationUnit);
+
+        final Intent intent = new Intent();
+        final Bundle extras = new Bundle();
+
+
+
+        call.enqueue(new Callback<OrganizationUnit>() {
+            @Override
+            public void onResponse(Call<OrganizationUnit> call, Response<OrganizationUnit> response) {
+
+                Log.d("RESPONSE", String.valueOf(response.body()));
+
+                extras.putString("ou_name", organizationUnit.getName());
+                extras.putString("ou_dn", organizationUnit.getDistinguishedName());
+                intent.putExtras(extras);
+
+                setResult(RESULT_OK, intent);
+                finish();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<OrganizationUnit> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Unable to create post" , Toast.LENGTH_LONG).show();
+                Log.d("fail create OU",t.toString());
+
+                setResult(RESULT_CANCELED, intent);
+                finish();
+
+
+            }
+        });
+
+    }
+
+
+
+
+
 }
