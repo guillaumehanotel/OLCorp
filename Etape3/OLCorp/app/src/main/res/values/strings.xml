@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">OLCorp</string>
+    <string name="organization_unit">Organization Unit</string>
+    <string name="groups">Groups</string>
+    <string name="users">Users</string>
+    <string name="add_btn">ADD</string>
+
+
+    <string name="create_ou">CREATE ORGANIZATION UNIT</string>
+    <string name="organization_unit_name">Organization Unit Name</string>
+    <string name="save_btn">SAVE</string>
+
+
+</resources>

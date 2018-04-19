@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:id="@+id/organization_unit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/bluelight"
+        >
+
+    <TextView
+        android:id="@+id/organization_unit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Domain Controller"
+        android:fontFamily="sans-serif-condensed"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>
