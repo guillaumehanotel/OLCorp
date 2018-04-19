@@ -3,7 +3,11 @@
     <string name="organization_unit">Organization Unit</string>
     <string name="groups">Groups</string>
     <string name="users">Users</string>
-    <string name="add_btn">ADD</string>
+
+
+    <string name="add_btn_ou">ADD ORGANIZATION UNIT</string>
+    <string name="add_btn_group">ADD GROUP</string>
+    <string name="add_btn_user">ADD USER</string>
 
 
     <string name="create_ou">CREATE ORGANIZATION UNIT</string>

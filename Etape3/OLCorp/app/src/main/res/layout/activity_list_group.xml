@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListGroupActivity">
+
+    <TextView
+        android:id="@+id/current_ou_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@color/greenlight"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:layout_marginBottom="5dp"
+        android:text="OrganizationUnit Name" />
+
+    <ListView
+        android:id="@+id/list_groups"
+        android:layout_width="match_parent"
+        android:layout_height="420dp">
+    </ListView>
+
+    <Button
+        android:id="@+id/group_add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_btn_group"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+</LinearLayout>

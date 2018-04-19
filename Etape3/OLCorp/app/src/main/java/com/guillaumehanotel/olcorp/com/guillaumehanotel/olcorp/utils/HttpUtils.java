@@ -3,6 +3,7 @@ package com.guillaumehanotel.olcorp.com.guillaumehanotel.olcorp.utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.guillaumehanotel.olcorp.api.GroupService;
 import com.guillaumehanotel.olcorp.api.OrganizationUnitService;
 
 import org.apache.http.HttpResponse;
@@ -28,6 +29,7 @@ public class HttpUtils {
     private Retrofit retrofit;
 
     public OrganizationUnitService organizationUnitService;
+    public GroupService groupService;
 
     private HttpUtils(){
         String HOME_IP = "192.168.1.29";
@@ -50,6 +52,7 @@ public class HttpUtils {
 
 
         organizationUnitService = retrofit.create(OrganizationUnitService.class);
+        groupService = retrofit.create(GroupService.class);
 
     }
 
