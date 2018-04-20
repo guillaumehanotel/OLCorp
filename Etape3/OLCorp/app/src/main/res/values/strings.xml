@@ -12,6 +12,11 @@
 
     <string name="create_ou">CREATE ORGANIZATION UNIT</string>
     <string name="organization_unit_name">Organization Unit Name</string>
+
+    <string name="create_group">CREATE GROUP</string>
+    <string name="group_name">Group Name</string>
+
+
     <string name="save_btn">SAVE</string>
 
 

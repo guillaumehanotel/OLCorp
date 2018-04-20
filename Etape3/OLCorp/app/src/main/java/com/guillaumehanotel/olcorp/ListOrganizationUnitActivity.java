@@ -83,6 +83,7 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
 
             String ou_name = extras.getString("ou_name");
             String ou_dn = extras.getString("ou_dn");
+
             organizationUnits.add(new OrganizationUnit(ou_name, ou_dn));
             organizationUnitAdapter.notifyDataSetChanged();
 
@@ -112,7 +113,10 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListOrganizationUnitActivity.this, ListGroupActivity.class);
                 Bundle extras = new Bundle();
 
+                Log.d("debug", organizationUnits.toString());
+
                 extras.putString("organizationUnit", new Gson().toJson(ou));
+                extras.putString("organizationUnits", new Gson().toJson(organizationUnits));
                 intent.putExtras(extras);
 
                 startActivity(intent);

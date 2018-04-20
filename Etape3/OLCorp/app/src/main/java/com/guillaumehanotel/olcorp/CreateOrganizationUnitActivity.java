@@ -38,10 +38,9 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
                 // Récupération du nom
                 String ou_name = ed_ou_name.getText().toString();
 
-                if(ou_name.equals("")){
+                if (ou_name.equals("")) {
                     Toast.makeText(CreateOrganizationUnitActivity.this, "Please fill the Organization Unit Name", Toast.LENGTH_SHORT).show();
                 } else {
-
 
                     OrganizationUnit ou = new OrganizationUnit();
                     ou.setName(ou_name);
@@ -50,16 +49,12 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
                     createOrganizationUnit(ou);
 
                 }
-
             }
         });
-
-
     }
 
 
-
-    private void createOrganizationUnit(final OrganizationUnit organizationUnit){
+    private void createOrganizationUnit(final OrganizationUnit organizationUnit) {
 
         HttpUtils httpUtils = HttpUtils.getInstance();
 
@@ -69,7 +64,6 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
 
         final Intent intent = new Intent();
         final Bundle extras = new Bundle();
-
 
 
         call.enqueue(new Callback<OrganizationUnit>() {
@@ -84,26 +78,19 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, intent);
                 finish();
-
-
             }
 
             @Override
             public void onFailure(Call<OrganizationUnit> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Unable to create post" , Toast.LENGTH_LONG).show();
-                Log.d("fail create OU",t.toString());
+                Toast.makeText(getApplicationContext(), "Unable to create organization unit", Toast.LENGTH_LONG).show();
+                Log.d("fail create OU", t.toString());
 
                 setResult(RESULT_CANCELED, intent);
                 finish();
-
-
             }
         });
 
     }
-
-
-
 
 
 }

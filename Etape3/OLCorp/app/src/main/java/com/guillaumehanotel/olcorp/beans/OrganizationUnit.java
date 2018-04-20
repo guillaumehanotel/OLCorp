@@ -19,10 +19,18 @@ public class OrganizationUnit extends ADEntity {
         nbOU++;
     }
 
+    /*
     @Override
     public String toString() {
         return "OrganizationUnit [id=" + id + ", name=" + name + ", DN=" + distinguishedName + "]";
     }
+*/
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 
 
 }

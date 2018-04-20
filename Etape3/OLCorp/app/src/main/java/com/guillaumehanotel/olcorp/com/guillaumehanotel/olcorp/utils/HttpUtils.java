@@ -44,7 +44,7 @@ public class HttpUtils {
 
 
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://" + HOME_IP + ":8080")
+                .baseUrl("http://" + YNOV_IP + ":8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 //.client(httpClient.build())
                 .build();
