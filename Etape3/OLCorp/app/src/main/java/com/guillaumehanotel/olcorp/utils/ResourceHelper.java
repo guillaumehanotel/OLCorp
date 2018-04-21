@@ -58,6 +58,32 @@ public class ResourceHelper {
         return users_filtered;
     }
 
+    public static boolean isUserBelongToOrganizationUnit(User user, OrganizationUnit organizationUnit){
+        String ouOfUser = StringUtils.substringBetween(user.getDistinguishedName(), ",OU=", ",DC=");
+        return organizationUnit.getName().equals(ouOfUser);
+    }
+
+    public static ArrayList<User> filterUsersByOU(ArrayList<User> users, OrganizationUnit organizationUnit) {
+        ArrayList<User> users_filtered = new ArrayList<>();
+        for (User user : users) {
+            if (isUserBelongToOrganizationUnit(user, organizationUnit)) {
+                users_filtered.add(user);
+            }
+        }
+        return users_filtered;
+    }
+
+
+    public static boolean isOrganizationUnitDeletable(OrganizationUnit organizationUnit, ArrayList<Group> groups, ArrayList<User> users){
+
+        // Liste des groupes & users qui appartient à l'OU
+        ArrayList<User> usersOfOU = filterUsersByOU(users, organizationUnit);
+        ArrayList<Group> groupsOfOU = filterGroupsByOU(groups, organizationUnit);
+
+        // si les 2 sont vides -> l'OU est supprimable
+        return usersOfOU.isEmpty() && groupsOfOU.isEmpty();
+    }
+
 
 
 }
