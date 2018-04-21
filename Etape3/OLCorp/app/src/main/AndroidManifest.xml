@@ -12,16 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListOrganizationUnitActivity">
+        <activity android:name=".core.ListOrganizationUnitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateOrganizationUnitActivity" />
-        <activity android:name=".ListGroupActivity" />
-        <activity android:name=".CreateGroupActivity"></activity>
+        <activity android:name=".core.CreateOrganizationUnitActivity" />
+        <activity android:name=".core.ListGroupActivity" />
+        <activity android:name=".core.CreateGroupActivity" />
+        <activity android:name=".core.ListUserActivity" />
+        <activity android:name=".core.CreateUserActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,41 @@
+ dhcp, dns, adds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Installation JDK :
+
+	Installer le jdk
+	copier le chemin vers le jdk :
+		C:\Program Files\Java\jdk1.8.0_161
+
+	Ce PC > Propriétés > Paramètres de systèmes avancés > Variables d'environnement
+
+	Nouvelle > JAVA_HOME / C:\Program Files\Java\jdk1.8.0_161
+	Path > Modifier > Nouveau > %JAVA_HOME%\bin
+
+	(Pour tester dans un terminal)
+	javac -version
+	java -version
+
+Installation Apache Tomcat :
+	
+		Installer Apache Tomcat
+			Full install
+
+		Win + R : services.msc
+		Right clic Apache Tomcat : Propriétés > type de démarrage > Manuel > Start

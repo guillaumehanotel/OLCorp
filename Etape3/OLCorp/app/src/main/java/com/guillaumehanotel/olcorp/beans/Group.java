@@ -21,7 +21,15 @@ public class Group extends ADEntity {
 
     @Override
     public String toString() {
+        return name;
+    }
+
+
+
+    public String getString() {
         return "Group [id=" + id + ", name=" + name + ", DN=" + distinguishedName + "]";
     }
+
+
 
 }

@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".core.ListOrganizationUnitActivity">
+    tools:context=".core.ListUserActivity">
 
 
     <TextView
-        android:id="@+id/tvIsConnected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#FF0000"
-        android:textColor="#FFF"
-        android:textSize="18dp"
+        android:id="@+id/current_group_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@color/greenlight"
+        android:textColor="@color/black"
+        android:textSize="21sp"
         android:layout_marginBottom="5dp"
-        android:text="is connected? " />
-
+        android:text="Group Name" />
 
     <ListView
-        android:id="@+id/list_organization_units"
+        android:id="@+id/list_users"
         android:layout_width="match_parent"
         android:layout_height="420dp">
     </ListView>
 
     <Button
-        android:id="@+id/organization_unit_add_btn"
+        android:id="@+id/user_add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_btn_ou"
+        android:text="@string/add_btn_user"
         android:layout_alignParentBottom="true"
         />
-
 
 
 

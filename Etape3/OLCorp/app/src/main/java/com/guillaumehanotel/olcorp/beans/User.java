@@ -77,8 +77,15 @@ public class User extends ADEntity {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", lastname=" + lastname + ", mail=" + mail
-                + ", telephone=" + telephone + ", DN=" + distinguishedName + "]";
+        return "User{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", mail='" + mail + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", memberOf='" + memberOf + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", distinguishedName='" + distinguishedName + '\'' +
+                '}';
     }
-
 }
