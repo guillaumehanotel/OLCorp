@@ -63,21 +63,13 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
 
         Call<OrganizationUnit> call = organizationUnitService.createOrganizationUnit(organizationUnit);
 
-        final Intent intent = new Intent();
-        final Bundle extras = new Bundle();
-
-
         call.enqueue(new Callback<OrganizationUnit>() {
             @Override
             public void onResponse(Call<OrganizationUnit> call, Response<OrganizationUnit> response) {
 
                 Log.d("RESPONSE", String.valueOf(response.body()));
 
-                extras.putString("ou_name", organizationUnit.getName());
-                extras.putString("ou_dn", organizationUnit.getDistinguishedName());
-                intent.putExtras(extras);
-
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_OK);
                 finish();
             }
 
@@ -86,7 +78,7 @@ public class CreateOrganizationUnitActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Unable to create organization unit", Toast.LENGTH_LONG).show();
                 Log.d("fail create OU", t.toString());
 
-                setResult(RESULT_CANCELED, intent);
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });

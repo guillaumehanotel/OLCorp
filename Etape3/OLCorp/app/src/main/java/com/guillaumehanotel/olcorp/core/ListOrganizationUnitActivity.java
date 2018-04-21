@@ -41,7 +41,7 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
 
 
     private TextView tvIsConnected;
-    private ListView list_organizationUnits;
+    private ListView lv_list_organizationUnits;
     private Button organization_unit_add_btn;
 
     private OrganizationUnitAdapter organizationUnitAdapter;
@@ -58,7 +58,7 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
 
         // get reference to the views
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
-        list_organizationUnits = (ListView) findViewById(R.id.list_organization_units);
+        lv_list_organizationUnits = (ListView) findViewById(R.id.list_organization_units);
         organization_unit_add_btn = (Button) findViewById(R.id.organization_unit_add_btn);
 
 
@@ -91,13 +91,9 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 151 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
 
-            String ou_name = extras.getString("ou_name");
-            String ou_dn = extras.getString("ou_dn");
-
-            organizationUnits.add(new OrganizationUnit(ou_name, ou_dn));
-            organizationUnitAdapter.notifyDataSetChanged();
+            finish();
+            startActivity(getIntent());
 
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
@@ -110,10 +106,10 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
 
         organizationUnits = (ArrayList<OrganizationUnit>) response.body();
         organizationUnitAdapter = new OrganizationUnitAdapter(ListOrganizationUnitActivity.this, organizationUnits);
-        list_organizationUnits.setAdapter(organizationUnitAdapter);
+        lv_list_organizationUnits.setAdapter(organizationUnitAdapter);
 
 
-        list_organizationUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_list_organizationUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -135,7 +131,7 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
         });
 
 
-        list_organizationUnits.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        lv_list_organizationUnits.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -147,17 +143,14 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
                         .setTitle("Organization Unit Record")
                         .setItems(items, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
-
                                 dialog.dismiss();
                                 if (item == 0) {
                                     //TODO : edit
                                 } else if (item == 1) {
                                     confirmDeleteOrganizationUnit(selected_ou);
-
                                 }
                             }
                         }).show();
-
                 return true;
             }
         });

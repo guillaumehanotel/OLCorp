@@ -1,5 +1,7 @@
 package com.guillaumehanotel.olcorp.utils;
 
+import android.util.Log;
+
 import com.guillaumehanotel.olcorp.beans.Group;
 import com.guillaumehanotel.olcorp.beans.OrganizationUnit;
 import com.guillaumehanotel.olcorp.beans.User;
@@ -45,6 +47,10 @@ public class ResourceHelper {
 
     public static boolean isUserBelongToGroup(User user, Group group) {
         String groupOfUser = StringUtils.substringBetween(user.getMemberOf(), "CN=", ",OU=");
+        if (groupOfUser == null){
+            groupOfUser = StringUtils.substringBetween(user.getMemberOf(), "CN=", ",CN=");
+        }
+
         return group.getName().equals(groupOfUser);
     }
 
@@ -84,6 +90,11 @@ public class ResourceHelper {
         return usersOfOU.isEmpty() && groupsOfOU.isEmpty();
     }
 
+
+    public static boolean isGroupDeletable(Group group, ArrayList<User> users){
+        ArrayList<User> usersOfGroup = filterUsersByGroup(users, group);
+        return usersOfGroup.isEmpty();
+    }
 
 
 }

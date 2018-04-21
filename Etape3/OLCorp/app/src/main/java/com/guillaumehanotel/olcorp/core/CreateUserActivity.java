@@ -149,19 +149,13 @@ public class CreateUserActivity extends AppCompatActivity {
 
         Call<User> call = userService.createUser(group.getId(), organizationUnit.getId(), user);
 
-        final Intent intent = new Intent();
-        final Bundle extras = new Bundle();
-
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d("RESPONSE", String.valueOf(response));
                 Log.d("RESPONSE", String.valueOf(response.body()));
 
-                extras.putString("user", new Gson().toJson(user));
-                intent.putExtras(extras);
-
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_OK);
                 finish();
             }
 
@@ -170,7 +164,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Unable to create user", Toast.LENGTH_LONG).show();
                 Log.d("fail create User", t.toString());
 
-                setResult(RESULT_CANCELED, intent);
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });

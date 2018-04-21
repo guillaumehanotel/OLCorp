@@ -97,20 +97,13 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         Call<Group> call = groupService.createGroup(organizationUnit.getId(), group);
 
-        final Intent intent = new Intent();
-        final Bundle extras = new Bundle();
-
         call.enqueue(new Callback<Group>() {
             @Override
             public void onResponse(Call<Group> call, Response<Group> response) {
                 Log.d("RESPONSE", String.valueOf(response));
                 Log.d("RESPONSE", String.valueOf(response.body()));
 
-                extras.putString("group_name", group.getName());
-                extras.putString("group_dn", group.getDistinguishedName());
-                intent.putExtras(extras);
-
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_OK);
                 finish();
             }
 
@@ -119,7 +112,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Unable to create group", Toast.LENGTH_LONG).show();
                 Log.d("fail create Group", t.toString());
 
-                setResult(RESULT_CANCELED, intent);
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });

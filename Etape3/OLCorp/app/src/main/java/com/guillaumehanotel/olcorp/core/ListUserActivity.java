@@ -1,9 +1,12 @@
 package com.guillaumehanotel.olcorp.core;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.guillaumehanotel.olcorp.R;
+import com.guillaumehanotel.olcorp.api.OrganizationUnitService;
 import com.guillaumehanotel.olcorp.api.UserService;
 import com.guillaumehanotel.olcorp.beans.Group;
 import com.guillaumehanotel.olcorp.beans.OrganizationUnit;
@@ -76,7 +80,6 @@ public class ListUserActivity extends AppCompatActivity {
                 intent.putExtras(extras);
 
                 startActivityForResult(intent, 153);
-
             }
         });
         getUsers();
@@ -88,22 +91,10 @@ public class ListUserActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 153 && resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-
-            String json_user = extras.getString("user");
-            Type collectionType = new TypeToken<User>(){}.getType();
-            User user = (new Gson()).fromJson(json_user, collectionType);
-
-            Log.d("USER", user.toString());
-
-            if(ResourceHelper.isUserBelongToGroup(user, currentGroup)){
-                users_filtered.add(user);
-                userAdapter.notifyDataSetChanged();
-            }
-
+            finish();
+            startActivity(getIntent());
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-
         }
 
     }
@@ -127,7 +118,74 @@ public class ListUserActivity extends AppCompatActivity {
         });
 
 
+        lv_list_users.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final CharSequence[] items = {"Edit", "Delete"};
+
+                User selected_user = users_filtered.get(position);
+
+                new AlertDialog.Builder(ListUserActivity.this)
+                        .setTitle("User Record")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+
+                                dialog.dismiss();
+                                if (item == 0) {
+                                    //TODO : edit
+                                } else if (item == 1) {
+                                    confirmDeleteUser(selected_user);
+                                }
+                            }
+                        }).show();
+                return true;
+            }
+        });
     }
+
+    private void confirmDeleteUser(User user){
+        AlertDialog.Builder alert = new AlertDialog.Builder(ListUserActivity.this);
+        alert.setTitle("Alert !!");
+        alert.setMessage("Are you sure to delete record ?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteUser(user);
+            }
+        });
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    private void deleteUser(User user){
+        HttpUtils httpUtils = HttpUtils.getInstance();
+        UserService userService= httpUtils.userService;
+        Call<ResponseBody> deleteUserCall = userService.deleteUser(user.getId());
+
+        deleteUserCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                users_filtered.remove(user);
+                userAdapter.notifyDataSetChanged();
+                Toast.makeText(ListUserActivity.this, "Delete successful", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("DELETEUser", "fail");
+                Toast.makeText(ListUserActivity.this, "Fail to delete OU", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
 
     private void getUsers() {
 
