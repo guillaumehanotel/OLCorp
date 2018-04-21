@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface OrganizationUnitService {
@@ -18,6 +19,9 @@ public interface OrganizationUnitService {
 
     @POST("/pseudo_olcorp_api/webapi/organizationunits")
     Call<OrganizationUnit> createOrganizationUnit(@Body OrganizationUnit organizationUnit);
+
+    @PUT("/pseudo_olcorp_api/webapi/organizationunits/{ou_id}")
+    Call<OrganizationUnit> updateOrganizationUnit(@Path("ou_id") int ou_id, @Body OrganizationUnit organizationUnit);
 
     @DELETE("/pseudo_olcorp_api/webapi/organizationunits/{ou_id}")
     Call<ResponseBody> deleteOrganizationUnit(@Path("ou_id") int ou_id);

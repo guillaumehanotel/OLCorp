@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context=".core.CreateGroupActivity">
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,9 +15,7 @@
         android:gravity="center_horizontal"
         android:textSize="32sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        />
-
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/group_name"
@@ -27,19 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="55dp"
-        android:hint="@string/group_name"
-        />
+        android:hint="@string/group_name" />
 
     <Spinner
         android:id="@+id/spinner_ou"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="25dp"
-        android:layout_gravity="center_horizontal"
-        >
+        android:layout_gravity="center_horizontal">
     </Spinner>
-
-
 
     <Button
         android:id="@+id/create_group_save_btn"
@@ -47,8 +39,6 @@
         android:layout_height="wrap_content"
         android:text="@string/save_btn"
         android:layout_marginTop="25dp"
-        android:layout_gravity="center_horizontal"
-        />
-
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

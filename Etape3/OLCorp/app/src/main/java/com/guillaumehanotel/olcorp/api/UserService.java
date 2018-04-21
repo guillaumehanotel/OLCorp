@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 
@@ -19,6 +20,9 @@ public interface UserService {
 
     @POST("/pseudo_olcorp_api/webapi/users/groups/{group_id}/organizationunits/{ou_id}")
     Call<User> createUser(@Path("group_id") int group_id, @Path("ou_id") int ou_id, @Body User user);
+
+    @PUT("/pseudo_olcorp_api/webapi/users/{user_id}")
+    Call<User> updateUser(@Path("user_id") int user_id, @Body User user);
 
     @DELETE("/pseudo_olcorp_api/webapi/users/{user_id}")
     Call<ResponseBody> deleteUser(@Path("user_id") int user_id);

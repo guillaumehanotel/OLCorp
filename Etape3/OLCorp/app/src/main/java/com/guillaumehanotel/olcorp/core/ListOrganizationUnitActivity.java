@@ -1,5 +1,6 @@
 package com.guillaumehanotel.olcorp.core;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -95,6 +96,11 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
 
+        } else if(requestCode == 154 && resultCode == RESULT_OK){
+
+            finish();
+            startActivity(getIntent());
+
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
@@ -142,10 +148,19 @@ public class ListOrganizationUnitActivity extends AppCompatActivity {
                 new AlertDialog.Builder(ListOrganizationUnitActivity.this)
                         .setTitle("Organization Unit Record")
                         .setItems(items, new DialogInterface.OnClickListener() {
+                            @SuppressLint({"NewApi", "RestrictedApi"})
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();
                                 if (item == 0) {
-                                    //TODO : edit
+
+                                    Intent intent = new Intent(ListOrganizationUnitActivity.this, EditOrganizationUnitActivity.class);
+                                    Bundle extras = new Bundle();
+
+                                    extras.putString("organizationUnit", new Gson().toJson(selected_ou));
+                                    intent.putExtras(extras);
+
+                                    startActivityForResult(intent, 154, extras);
+
                                 } else if (item == 1) {
                                     confirmDeleteOrganizationUnit(selected_ou);
                                 }

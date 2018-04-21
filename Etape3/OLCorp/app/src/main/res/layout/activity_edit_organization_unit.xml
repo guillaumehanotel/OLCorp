@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".core.CreateOrganizationUnitActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".core.EditOrganizationUnitActivity">
+
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_ou"
+        android:text="@string/update_ou"
         android:gravity="center_horizontal"
         android:textSize="32sp"
         android:textColor="@color/black"
@@ -31,13 +32,12 @@
 
 
     <Button
-        android:id="@+id/create_ou_save_btn"
+        android:id="@+id/update_ou_save_btn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/save_btn"
+        android:text="@string/update_btn"
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal"
         />
-
 
 </LinearLayout>

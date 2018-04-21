@@ -23,7 +23,10 @@
         <activity android:name=".core.ListGroupActivity" />
         <activity android:name=".core.CreateGroupActivity" />
         <activity android:name=".core.ListUserActivity" />
-        <activity android:name=".core.CreateUserActivity"></activity>
+        <activity android:name=".core.CreateUserActivity" />
+        <activity android:name=".core.EditOrganizationUnitActivity" />
+        <activity android:name=".core.EditGroupActivity" />
+        <activity android:name=".core.EditUserActivity"></activity>
     </application>
 
 </manifest>

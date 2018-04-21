@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".core.CreateUserActivity">
+    tools:context=".core.EditUserActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_user"
+        android:text="@string/update_user"
         android:gravity="center_horizontal"
         android:textSize="32sp"
         android:textColor="@color/black"
@@ -74,7 +74,7 @@
     </Spinner>
 
     <Button
-        android:id="@+id/create_user_save_btn"
+        android:id="@+id/update_user_save_btn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/save_btn"
