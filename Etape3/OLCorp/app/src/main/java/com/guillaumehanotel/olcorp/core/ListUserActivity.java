@@ -1,5 +1,6 @@
 package com.guillaumehanotel.olcorp.core;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -90,11 +91,17 @@ public class ListUserActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 153 && resultCode == RESULT_OK){
+        if(requestCode == 153 && resultCode == RESULT_OK) {
             finish();
             startActivity(getIntent());
+
+        } else if(requestCode == 156 && resultCode == RESULT_OK){
+
+            finish();
+            startActivity(getIntent());
+
         } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -129,11 +136,21 @@ public class ListUserActivity extends AppCompatActivity {
                 new AlertDialog.Builder(ListUserActivity.this)
                         .setTitle("User Record")
                         .setItems(items, new DialogInterface.OnClickListener() {
+                            @SuppressLint({"NewApi", "RestrictedApi"})
                             public void onClick(DialogInterface dialog, int item) {
 
                                 dialog.dismiss();
                                 if (item == 0) {
-                                    //TODO : edit
+
+                                    Intent intent = new Intent(ListUserActivity.this, EditUserActivity.class);
+                                    Bundle extras = new Bundle();
+
+                                    extras.putString("user", new Gson().toJson(selected_user));
+                                    intent.putExtras(extras);
+
+                                    startActivityForResult(intent, 156, extras);
+
+
                                 } else if (item == 1) {
                                     confirmDeleteUser(selected_user);
                                 }

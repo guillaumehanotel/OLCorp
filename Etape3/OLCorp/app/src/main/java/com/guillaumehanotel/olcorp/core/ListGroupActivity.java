@@ -1,5 +1,6 @@
 package com.guillaumehanotel.olcorp.core;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -113,8 +114,13 @@ public class ListGroupActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
 
+        } else if(requestCode == 155 && resultCode == RESULT_OK){
+
+            finish();
+            startActivity(getIntent());
+
         } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -160,14 +166,22 @@ public class ListGroupActivity extends AppCompatActivity {
                 new AlertDialog.Builder(ListGroupActivity.this)
                         .setTitle("Group Record")
                         .setItems(items, new DialogInterface.OnClickListener() {
+                            @SuppressLint({"NewApi", "RestrictedApi"})
                             public void onClick(DialogInterface dialog, int item) {
 
                                 dialog.dismiss();
                                 if (item == 0) {
-                                    //TODO : edit
+
+                                    Intent intent = new Intent(ListGroupActivity.this, EditGroupActivity.class);
+                                    Bundle extras = new Bundle();
+
+                                    extras.putString("group", new Gson().toJson(selected_group));
+                                    intent.putExtras(extras);
+
+                                    startActivityForResult(intent, 155, extras);
+
                                 } else if (item == 1) {
                                     confirmDeleteGroup(selected_group);
-
                                 }
                             }
                         }).show();

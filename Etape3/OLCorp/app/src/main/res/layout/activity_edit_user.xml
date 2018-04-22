@@ -57,21 +57,6 @@
         android:layout_marginTop="5dp"
         android:hint="@string/user_telephone" />
 
-    <Spinner
-        android:id="@+id/spinner_ou"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="25dp"
-        android:layout_gravity="center_horizontal">
-    </Spinner>
-
-    <Spinner
-        android:id="@+id/spinner_group"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal">
-    </Spinner>
 
     <Button
         android:id="@+id/update_user_save_btn"

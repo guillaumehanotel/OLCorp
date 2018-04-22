@@ -60,7 +60,7 @@ public class EditOrganizationUnitActivity extends AppCompatActivity {
                     Toast.makeText(EditOrganizationUnitActivity.this, "Please fill the Organization Unit Name", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    organizationUnit.setDistinguishedName(StringUtils.replaceChars(organizationUnit.getDistinguishedName(), organizationUnit.getName(), ou_name));
+                    organizationUnit.setDistinguishedName(organizationUnit.getDistinguishedName().replace(organizationUnit.getName(), ou_name));
                     organizationUnit.setName(ou_name);
 
                     updateOrganizationUnit(organizationUnit);
@@ -96,8 +96,6 @@ public class EditOrganizationUnitActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
     }
 
